@@ -7,6 +7,17 @@ repositories{
     mavenCentral()
 }
 
+compileJava {
+    options.encoding = 'UTF-8'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
+def allureVersion = "2.19.0",
+    selenideVersion = "7.4.2"
+
 allure{
     report{//секция репорта
         version.set("2.19.0")
@@ -28,22 +39,32 @@ dependencies {
             'com.codeborne:selenide:7.5.0',
             'com.fasterxml.jackson.core:jackson-databind:2.18.0',
             'io.qameta.allure:allure-selenide:2.29.0',
+            'org.slf4j:slf4j-simple:2.0.7',
             'com.github.javafaker:javafaker:1.0.2'
-            /*     'org.slf4j:slf4j-simple:2.0.7',
-                 'com.github.javafaker:javafaker:1.0.2',
+            /*   'com.github.javafaker:javafaker:1.0.2',
                  'commons-io:commons-io:2.15.0',
                  'com.codeborne:pdf-test:1.5.0',
                  'com.codeborne:xls-test:1.4.3',
                  'com.opencsv:opencsv:5.9',
                  'com.google.code.gson:gson:2.10.1',
-
                  'org.assertj:assertj-core:3.26.3'
-
              */
     )
 }
 
-test{
-    useJUnitPlatform()  /*Тесты буду запущены с помощью JUnit*/
-    systemProperties(System.getProperties())
+tasks.withType(Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task RegFormJenkinsTest(type: Test) {
+    useJUnitPlatform {
+        includeTags("registrationFormTest")
+    }
 }
