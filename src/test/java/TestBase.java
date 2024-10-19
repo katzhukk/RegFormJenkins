@@ -12,10 +12,11 @@ public class TestBase {
     @BeforeAll
     static void setup() {
         Configuration.browserSize = "1920x1080";
-        //Configuration.browser = "chrome";
+        Configuration.browser = "chrome";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         //Configuration.holdBrowserOpen = true;
+        Configuration.timeout = 10000;
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub"; //удаленный запуск тестов
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -30,9 +31,11 @@ public class TestBase {
 
     @AfterEach
     void addAttachments() {
-        Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
+        /*     Attach.screenshotAs("Last screenshot");
+
         Attach.browserConsoleLogs();
         Attach.addVideo();
+        */
     }
 }

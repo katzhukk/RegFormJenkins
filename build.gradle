@@ -1,6 +1,6 @@
 plugins{
     id  'java'
-    id 'io.qameta.allure' version '2.10.0'
+    id 'io.qameta.allure' version '2.12.0'
 }
 
 repositories{
@@ -15,8 +15,7 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
-def allureVersion = "2.19.0",
-    selenideVersion = "7.4.2"
+def allureVersion = "2.19.0"
 
 allure{
     report{//секция репорта
@@ -41,8 +40,7 @@ dependencies {
             'io.qameta.allure:allure-selenide:2.29.0',
             'org.slf4j:slf4j-simple:2.0.7',
             'com.github.javafaker:javafaker:1.0.2'
-            /*   'com.github.javafaker:javafaker:1.0.2',
-                 'commons-io:commons-io:2.15.0',
+            /*   'commons-io:commons-io:2.15.0',
                  'com.codeborne:pdf-test:1.5.0',
                  'com.codeborne:xls-test:1.4.3',
                  'com.opencsv:opencsv:5.9',
