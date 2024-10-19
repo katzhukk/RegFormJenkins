@@ -15,7 +15,6 @@ compileTestJava {
     options.encoding = 'UTF-8'
 }
 
-def allureVersion = "2.19.0"
 
 allure{
     report{//секция репорта
@@ -34,23 +33,15 @@ allure{
 
 dependencies {
     testImplementation(
-            'org.junit.jupiter:junit-jupiter:5.11.0',
-            'com.codeborne:selenide:7.5.0',
-            'com.fasterxml.jackson.core:jackson-databind:2.18.0',
+            'org.junit.jupiter:junit-jupiter-engine:5.11.2',
+            'com.codeborne:selenide:7.5.1',
             'io.qameta.allure:allure-selenide:2.29.0',
-            'org.slf4j:slf4j-simple:2.0.7',
-            'com.github.javafaker:javafaker:1.0.2'
-            /*   'commons-io:commons-io:2.15.0',
-                 'com.codeborne:pdf-test:1.5.0',
-                 'com.codeborne:xls-test:1.4.3',
-                 'com.opencsv:opencsv:5.9',
-                 'com.google.code.gson:gson:2.10.1',
-                 'org.assertj:assertj-core:3.26.3'
-             */
+            'com.github.javafaker:javafaker:1.0.2',
+            'org.slf4j:slf4j-simple:2.0.16'
     )
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     useJUnitPlatform()
 
     testLogging {
@@ -61,7 +52,7 @@ tasks.withType(Test) {
     }
 }
 
-task RegFormJenkinsTest(type: Test) {
+tasks.register('RegFormJenkinsTest', Test) {
     useJUnitPlatform {
         includeTags("registrationFormTest")
     }
