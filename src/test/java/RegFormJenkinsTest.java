@@ -1,3 +1,5 @@
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -9,6 +11,7 @@ import static io.qameta.allure.Allure.step;
 @Tag("registrationFormTest")
 @DisplayName("Страница формы регистрации студента")
 public class RegFormJenkinsTest extends TestBase {
+
     private final RegistrationPage registrationPage = new RegistrationPage();
 
     String firstName = RandomUtils.getRandomFirstName(),
@@ -29,6 +32,7 @@ public class RegFormJenkinsTest extends TestBase {
     @DisplayName("Тест на проверку успешной регистрации студента")
     @Test
     void successfulRegistrationTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открываем страницу формы регистрации студента", () -> {
             registrationPage.openPage();
         });
@@ -66,6 +70,7 @@ public class RegFormJenkinsTest extends TestBase {
     @DisplayName("Тест на неполное заполнение формы регистрации студента")
     @Test
     void incompleteDataEntry() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открываем страницу формы регистрации студента", () -> {
             registrationPage.openPage();
         });
