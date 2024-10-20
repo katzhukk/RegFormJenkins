@@ -29,6 +29,7 @@ public class RegFormJenkinsTest extends TestBase {
             state = RandomUtils.getRandomState(),
             city = RandomUtils.getRandomCity(state);
 
+    @Tag("simple")
     @DisplayName("Тест на проверку успешной регистрации студента")
     @Test
     void successfulRegistrationTest() {
@@ -67,6 +68,8 @@ public class RegFormJenkinsTest extends TestBase {
         });
     }
 
+    @Tag("negative")
+    @Tag("simple")
     @DisplayName("Тест на неполное заполнение формы регистрации студента")
     @Test
     void incompleteDataEntry() {
@@ -83,6 +86,22 @@ public class RegFormJenkinsTest extends TestBase {
                     .setCity(city)
                     .clickSubmit();
         });
+
+        step("Проверка неудачной попытки зарегистрироваться", () -> {
+            registrationPage.checkNegativeResult();
+        });
+    }
+
+    @Tag("negative")
+    @DisplayName("Тест на неполное заполнение формы регистрации студента")
+    @Test
+    void clickSubmitTest() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+        step("Открываем страницу формы регистрации студента", () -> {
+            registrationPage.openPage();
+        });
+
+        step("Нажимаем на Submit", () -> {registrationPage.clickSubmit();});
 
         step("Проверка неудачной попытки зарегистрироваться", () -> {
             registrationPage.checkNegativeResult();

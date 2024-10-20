@@ -44,6 +44,8 @@ dependencies {
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
 
+    systemProperties(System.getProperties())
+
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
@@ -55,5 +57,17 @@ tasks.withType(Test).configureEach {
 tasks.register('RegFormJenkinsTest', Test) {
     useJUnitPlatform {
         includeTags("registrationFormTest")
+    }
+}
+
+task simple_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("simple")
+    }
+}
+
+task negative_test(type: Test) {
+    useJUnitPlatform{
+        includeTags("negative")
     }
 }
