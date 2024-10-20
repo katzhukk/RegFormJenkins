@@ -14,11 +14,10 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browserSize");
         Configuration.browser = System.getProperty("browser");
         Configuration.browserVersion = System.getProperty("browserVersion");
+        Configuration.remote = System.getProperty("urlHost");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         //Configuration.holdBrowserOpen = true;
-        Configuration.timeout = 10000;
-        Configuration.remote = System.getProperty("urlHost"); //удаленный запуск тестов
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -34,7 +33,6 @@ public class TestBase {
     void addAttachments() {
         Attach.pageSource();
         Attach.screenshotAs("Last screenshot");
-
         Attach.browserConsoleLogs();
         Attach.addVideo();
     }
