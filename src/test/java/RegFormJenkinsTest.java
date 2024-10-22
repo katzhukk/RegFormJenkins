@@ -1,4 +1,5 @@
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Owner;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -30,6 +31,7 @@ public class RegFormJenkinsTest extends TestBase {
             city = RandomUtils.getRandomCity(state);
 
     @Tag("simple")
+    @Owner("Ekaterina Zhukova")
     @DisplayName("Тест на проверку успешной регистрации студента")
     @Test
     void successfulRegistrationTest() {
@@ -70,6 +72,7 @@ public class RegFormJenkinsTest extends TestBase {
 
     @Tag("negative")
     @Tag("simple")
+    @Owner("Ekaterina Zhukova")
     @DisplayName("Тест на неполное заполнение формы регистрации студента")
     @Test
     void incompleteDataEntry() {
@@ -93,6 +96,7 @@ public class RegFormJenkinsTest extends TestBase {
     }
 
     @Tag("negative")
+    @Owner("Ekaterina Zhukova")
     @DisplayName("Тест на неполное заполнение формы регистрации студента")
     @Test
     void clickSubmitTest() {
